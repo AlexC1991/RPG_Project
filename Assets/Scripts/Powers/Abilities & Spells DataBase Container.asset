@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b65c0fcf575f414408a29a091ca1ac8d, type: 3}
+  m_Name: Abilities & Spells DataBase Container
+  m_EditorClassIdentifier: 
+  powerSelectionScript:
+  - {fileID: 11400000, guid: b3f97d44205927f4daa333df2fd00a33, type: 2}
+  - {fileID: 11400000, guid: c68c7fec59139ff40a7c934737b8efc7, type: 2}
+  - {fileID: 11400000, guid: dacbbc116ddf52548a80c4e366595b03, type: 2}
+  - {fileID: 11400000, guid: f513be3c18cf62e40b6cee466ad29ad4, type: 2}
