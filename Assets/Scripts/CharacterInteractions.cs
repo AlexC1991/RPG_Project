@@ -3,75 +3,98 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterInteractions : MonoBehaviour
+namespace RPGGame
 {
-    [TagSelector][SerializeField] private string[] interactableTag;
-    [SerializeField] private InputActionAsset controllerSettings;
-    private InputAction _interact;
-    [SerializeField] private GameObject storeUI;
-    private bool _storeChecker;
-    private void Awake()
+    public class CharacterInteractions : MonoBehaviour
     {
-        _interact = controllerSettings.FindActionMap("Player").FindAction("Interact");
-    }
+        [TagSelector] [SerializeField] private string[] interactableTag;
+        [SerializeField] private InputActionAsset controllerSettings;
+        private CharacterMovement _characterMovement;
+        private InputAction _interact;
+        [SerializeField] private GameObject storeUI;
+        private bool _storeChecker;
+        private int i;
 
-    private void onEnable()
-    {
-        _interact.Enable();
-    }
-
-    private void Start()
-    {
-        storeUI.GetComponent<CanvasGroup>().alpha = 0;
-        _storeChecker = false;
-        StartCoroutine(InteractionCheck());
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (Array.Exists(interactableTag, tag => tag == other.tag))
+        private void Awake()
         {
-            if (other.tag == interactableTag[0])
+            _interact = controllerSettings.FindActionMap("Player").FindAction("Interact");
+        }
+
+        private void OnEnable()
+        {
+            _interact.Enable();
+        }
+        
+        private void Start()
+        {
+            _characterMovement = FindObjectOfType<CharacterMovement>();
+            storeUI.GetComponent<CanvasGroup>().alpha = 0;
+            _storeChecker = false;
+            StartCoroutine(InteractionCheck());
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(interactableTag[0]))
             {
                 _storeChecker = true;
                 Debug.Log("Can Interact With Store");
             }
         }
-    }
 
-    private IEnumerator InteractionCheck()
-    {
-        while (true)
+        private IEnumerator InteractionCheck()
         {
-            if (_interact.triggered && _storeChecker)
+            while (true)
             {
-                if (storeUI.GetComponent<CanvasGroup>().alpha != 1)
+                Debug.Log("interaction Number is " + i);
+                if (_interact.triggered)
                 {
-                    storeUI.GetComponent<CanvasGroup>().alpha = 1;
-                }
-                else
-                {
-                    storeUI.GetComponent<CanvasGroup>().alpha = 0;
-                }
-            }
-            yield return null;
-        }
-    }
+                    if (_storeChecker)
+                    {
+                        i += 1;
+                    }
+                    
+                    if (_storeChecker && i % 2 != 0)
+                    {
+                        storeUI.GetComponent<CanvasGroup>().alpha = 1;
+                        Debug.Log("Store UI Canvas Group Alpha is 1");
+                        _characterMovement.StopCharacterMovement();
+                        Cursor.visible = true;
+                    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (Array.Exists(interactableTag, tag => tag == other.tag))
+                    if (i % 2 == 0)
+                    {
+                        storeUI.GetComponent<CanvasGroup>().alpha = 0;
+                        Debug.Log("Store UI Canvas Group Alpha is 0");
+                        _characterMovement.StartCharacterMovement();
+                        Cursor.visible = false;
+                    }
+
+                    if (i > 2)
+                    {
+                        i = 0;
+                    }
+                }
+
+                yield return null;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
         {
-            if (other.tag == interactableTag[0])
+            if (other.CompareTag(interactableTag[0]))
             {
                 _storeChecker = false;
                 Debug.Log("Store is Closed");
+                i = 0;
+                storeUI.GetComponent<CanvasGroup>().alpha = 0;
+                Debug.Log("Store UI Canvas Group Alpha is 0");
             }
         }
-    }
 
-    private void OnDisable()
-    {
-        _interact.Disable();
+        private void OnDisable()
+        {
+            _interact.Disable();
+        }
     }
 }

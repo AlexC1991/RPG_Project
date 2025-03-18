@@ -67,6 +67,7 @@ namespace RPGGame
                 if (openInventory.triggered)
                 {
                     i += 1;
+                    Debug.Log("Inventory Opened");
                 }
 
                 if (i == 1)
