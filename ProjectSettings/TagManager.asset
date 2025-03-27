@@ -6,6 +6,10 @@ TagManager:
   tags:
   - PowerBox
   - Store
+  - FirePower
+  - WaterPower
+  - EarthPower
+  - AirPower
   layers:
   - Default
   - TransparentFX

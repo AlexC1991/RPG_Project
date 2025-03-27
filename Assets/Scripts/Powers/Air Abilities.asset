@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b65c0fcf575f414408a29a091ca1ac8d, type: 3}
-  m_Name: Abilities & Spells DataBase Container
+  m_Name: Air Abilities
   m_EditorClassIdentifier: 
+  powerTag: AirPower
   powerSelectionScript:
   - {fileID: 11400000, guid: b3f97d44205927f4daa333df2fd00a33, type: 2}
-  - {fileID: 11400000, guid: c68c7fec59139ff40a7c934737b8efc7, type: 2}
-  - {fileID: 11400000, guid: dacbbc116ddf52548a80c4e366595b03, type: 2}
-  - {fileID: 11400000, guid: f513be3c18cf62e40b6cee466ad29ad4, type: 2}

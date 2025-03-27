@@ -29,6 +29,7 @@ namespace RPGGame
             public Sprite icon;
             public GameObject abilityPrefabs;
             public AnimationClip abilityAnimationClip;
+            public float abilityPrice;
         }
         
         public PowerSelection powerData;

@@ -29,6 +29,7 @@ namespace RPGGame
         {
             _characterMovement = FindObjectOfType<CharacterMovement>();
             storeUI.GetComponent<CanvasGroup>().alpha = 0;
+            storeUI.GetComponent<CanvasGroup>().blocksRaycasts = false;     
             _storeChecker = false;
             StartCoroutine(InteractionCheck());
         }
@@ -57,6 +58,7 @@ namespace RPGGame
                     if (_storeChecker && i % 2 != 0)
                     {
                         storeUI.GetComponent<CanvasGroup>().alpha = 1;
+                        storeUI.GetComponent<CanvasGroup>().blocksRaycasts = true;  
                         Debug.Log("Store UI Canvas Group Alpha is 1");
                         _characterMovement.StopCharacterMovement();
                         Cursor.visible = true;
@@ -65,6 +67,7 @@ namespace RPGGame
                     if (i % 2 == 0)
                     {
                         storeUI.GetComponent<CanvasGroup>().alpha = 0;
+                        storeUI.GetComponent<CanvasGroup>().blocksRaycasts = false;  
                         Debug.Log("Store UI Canvas Group Alpha is 0");
                         _characterMovement.StartCharacterMovement();
                         Cursor.visible = false;
@@ -88,6 +91,7 @@ namespace RPGGame
                 Debug.Log("Store is Closed");
                 i = 0;
                 storeUI.GetComponent<CanvasGroup>().alpha = 0;
+                storeUI.GetComponent<CanvasGroup>().blocksRaycasts = false;  
                 Debug.Log("Store UI Canvas Group Alpha is 0");
             }
         }
