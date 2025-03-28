@@ -3955,8 +3955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersPowers: []
-  powerBox: PowerBox
-  displayedIcon: {fileID: 707113745}
+  uiC: {fileID: 1686697951}
 --- !u!114 &1129800804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3969,8 +3968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba77b43d14aad14f84003c16a0dd508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityPrefabs:
-  - {fileID: 3034341003016815578, guid: f903e22cdbc315e4c864cc5e4f2a5828, type: 3}
   shootingPoint: {fileID: 617477452}
 --- !u!114 &1129800805
 MonoBehaviour:
@@ -4668,6 +4665,7 @@ MonoBehaviour:
   - {fileID: 1389436324}
   - {fileID: 824800052}
   - {fileID: 884862574}
+  pP: {fileID: 1129800803}
 --- !u!1 &1955831333
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7156763287343940036}
   - component: {fileID: 3136762888292071175}
   - component: {fileID: 2957002773471148511}
+  - component: {fileID: 5726765872835333618}
   m_Layer: 5
   m_Name: Spell Template
   m_TagString: Untagged
@@ -79,6 +80,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5726765872835333618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6339634927358218011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4fbc7768c15894f92b4242636ca84e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerForThisSpell:
+    level: 0
+    id: 
+    name: 
+    power: 0
+    damage: 0
+    range: 0
+    velocity: 0
+    coolDownTimer: 0
+    icon: {fileID: 0}
+    abilityPrefabs: {fileID: 0}
+    abilityAnimationClip: {fileID: 0}
+    abilityPrice: 0
 --- !u!1 &7041014738121804910
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,4 +710,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9092047619882857629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5726765872835333618}
+        m_TargetAssemblyTypeName: SpellCardDetails, Assembly-CSharp
+        m_MethodName: LearnPower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

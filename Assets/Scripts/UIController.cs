@@ -10,8 +10,9 @@ namespace RPGGame
     {
         [SerializeField] private InputActionAsset controllerSettings;
         [SerializeField] private GameObject[] uiElements;
-        [SerializeField] private GameObject[] powerIcons;
+        [SerializeField] public GameObject[] powerIcons;
         [SerializeField] private GameObject[] abilitySelection;
+        [SerializeField] PlayerPowers pP;
         private AbilityActivation abilityActivation;
         private InputAction openInventory;
         private InputAction abilityOne;
@@ -73,6 +74,7 @@ namespace RPGGame
                 if (i == 1)
                 {
                     uiElements[0].GetComponent<CanvasGroup>().alpha = 1;
+                    Cursor.visible = true;
                     CheckPowerIcons();
                     ChooseAbilitySelection();
                 }
@@ -82,6 +84,7 @@ namespace RPGGame
                 }
                 if (i > 1)
                 {
+                    Cursor.visible = false;
                     abilitySelection[0].GetComponent<CanvasGroup>().alpha = 0;
                     abilitySelection[1].GetComponent<CanvasGroup>().alpha = 0;
                     abilitySelection[2].GetComponent<CanvasGroup>().alpha = 0;
@@ -118,7 +121,10 @@ namespace RPGGame
                 abilitySelection[2].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[3].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[4].GetComponent<CanvasGroup>().alpha = 0;
-                abilityActivation.ActivateTheAbility("1F");
+                if (pP.playersPowers.Count > 0)
+                {
+                    abilityActivation.ActivateTheAbility(pP.playersPowers[0].id);
+                }
             }
             if (abilityTwo.triggered)
             {
@@ -127,6 +133,10 @@ namespace RPGGame
                 abilitySelection[2].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[3].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[4].GetComponent<CanvasGroup>().alpha = 0;
+                if (pP.playersPowers.Count > 1)
+                {
+                    abilityActivation.ActivateTheAbility(pP.playersPowers[1].id);
+                }
             }
             if (abilityThree.triggered)
             {
@@ -135,6 +145,10 @@ namespace RPGGame
                 abilitySelection[2].GetComponent<CanvasGroup>().alpha = 1;
                 abilitySelection[3].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[4].GetComponent<CanvasGroup>().alpha = 0;
+                if (pP.playersPowers.Count > 2)
+                {
+                    abilityActivation.ActivateTheAbility(pP.playersPowers[2].id);
+                }
             }
             if (abilityFour.triggered)
             {
@@ -143,6 +157,10 @@ namespace RPGGame
                 abilitySelection[2].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[3].GetComponent<CanvasGroup>().alpha = 1;
                 abilitySelection[4].GetComponent<CanvasGroup>().alpha = 0;
+                if (pP.playersPowers.Count > 3)
+                {
+                    abilityActivation.ActivateTheAbility(pP.playersPowers[3].id);
+                }
             }
             if (abilityFive.triggered)
             {
@@ -151,6 +169,10 @@ namespace RPGGame
                 abilitySelection[2].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[3].GetComponent<CanvasGroup>().alpha = 0;
                 abilitySelection[4].GetComponent<CanvasGroup>().alpha = 1;
+                if (pP.playersPowers.Count > 4)
+                {
+                    abilityActivation.ActivateTheAbility(pP.playersPowers[4].id);
+                }
             }
         }
         

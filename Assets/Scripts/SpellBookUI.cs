@@ -37,7 +37,6 @@ namespace RPGGame
                         }
                     }
                 }
-                
             }
             else if (button.transform.tag == waterTag)
             {
@@ -50,7 +49,6 @@ namespace RPGGame
                             powers.Add(g.powerData);
                             SetSpellBook();
                         }
-                        
                     }
                 }
             }
@@ -65,7 +63,6 @@ namespace RPGGame
                             powers.Add(g.powerData);
                             SetSpellBook();
                         }
-                        
                     }
                 }
             }
@@ -80,12 +77,8 @@ namespace RPGGame
                             powers.Add(g.powerData);
                             SetSpellBook();
                         }
-                        
                     }
                 }
-            }
-            {
-                
             }
         }
 
@@ -102,9 +95,12 @@ namespace RPGGame
             foreach (var power in powers)
             {
                 GameObject spell = Instantiate(spellTemplatePrefab, spellBookContent);
+                spell.GetComponent<SpellCardDetails>().powerForThisSpell = power;
                 spell.transform.GetChild(0).GetComponent<Image>().sprite = power.icon;
                 spell.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = power.name;
                 spell.transform.name = power.name + " Spell";
+                
+                
                 if (power.abilityPrice == 0)
                 {
                     spell.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Free";
@@ -113,12 +109,10 @@ namespace RPGGame
                 {
                     spell.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = power.abilityPrice.ToString("F2");
                 }
-
                 if (spellBookContent.childCount > powers.Count)
                 {
                     Destroy(spellBookContent.GetChild(0).gameObject);
                 }
-                
             }
         }
     }
