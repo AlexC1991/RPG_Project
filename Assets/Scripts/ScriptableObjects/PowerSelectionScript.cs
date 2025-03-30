@@ -14,6 +14,19 @@ namespace RPGGame
             Earth,
             Air
         }
+        public enum PowerType
+        {
+            Projectile,
+            Buff,
+            AOE
+        }
+        public enum BuffAbility
+        {
+            Health,
+            Damage,
+            Speed
+        }
+
         
         [System.Serializable]
         public struct PowerSelection
@@ -21,16 +34,41 @@ namespace RPGGame
             public int level;
             public string id;
             public string name;
+            public PowerType powerType;
             public Powers power;
-            public float damage;
-            public float range;
-            public float velocity; 
             public float coolDownTimer;
             public Sprite icon;
             public GameObject abilityPrefabs;
             public AnimationClip abilityAnimationClip;
             public float abilityPrice;
+            public ProjectileType projectileType;
+            public BuffType buffType;
+            public AEOType aeoType;
         }
+        
+        [System.Serializable]
+        public struct ProjectileType
+        {
+            public float range;
+            public float speed;
+            public float damage;
+        }
+        [System.Serializable]
+        public struct BuffType
+        {
+            public float duration;
+            public BuffAbility buffAbility;
+            public float buffValue;
+        }
+        [System.Serializable]
+        public struct AEOType
+        {
+            public float radius;
+            public float abilityValue;
+            public BuffAbility buffAbility;
+            public float duration;
+        }
+        
         
         public PowerSelection powerData;
         

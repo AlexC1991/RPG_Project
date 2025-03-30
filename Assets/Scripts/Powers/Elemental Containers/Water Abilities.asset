@@ -15,3 +15,5 @@ MonoBehaviour:
   powerTag: WaterPower
   powerSelectionScript:
   - {fileID: 11400000, guid: f513be3c18cf62e40b6cee466ad29ad4, type: 2}
+  - {fileID: 11400000, guid: 019c73fd552e2a5429a827f22da253ce, type: 2}
+  - {fileID: 11400000, guid: 9bb6b27ba6e882d45851638465860024, type: 2}

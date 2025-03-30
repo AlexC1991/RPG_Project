@@ -15,3 +15,4 @@ MonoBehaviour:
   powerTag: EarthPower
   powerSelectionScript:
   - {fileID: 11400000, guid: c68c7fec59139ff40a7c934737b8efc7, type: 2}
+  - {fileID: 11400000, guid: edb9123797182164e92d78f45f18cbcc, type: 2}
