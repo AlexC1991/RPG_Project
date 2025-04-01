@@ -21,7 +21,12 @@ namespace RPGGame
         private InputAction abilityFour;
         private InputAction abilityFive;
         private Coroutine _uiUsage;
+        private bool inventoryOpen;
         private int i = 0;
+        public bool uiWindowOpened;
+        private GameObject currentOpenWindow;
+        private Coroutine _actionBar;
+
         
         private void Awake()
         { 
@@ -65,35 +70,53 @@ namespace RPGGame
         {
             while (true)
             {
+                // Check for inventory toggle request
                 if (openInventory.triggered)
                 {
-                    i += 1;
-                    Debug.Log("Inventory Opened");
-                }
-
-                if (i == 1)
-                {
-                    uiElements[0].GetComponent<CanvasGroup>().alpha = 1;
-                    Cursor.visible = true;
-                    CheckPowerIcons();
-                    ChooseAbilitySelection();
-                }
-                else
-                {
-                    uiElements[0].GetComponent<CanvasGroup>().alpha = 0;
-                }
-                if (i > 1)
-                {
-                    Cursor.visible = false;
-                    abilitySelection[0].GetComponent<CanvasGroup>().alpha = 0;
-                    abilitySelection[1].GetComponent<CanvasGroup>().alpha = 0;
-                    abilitySelection[2].GetComponent<CanvasGroup>().alpha = 0;
-                    abilitySelection[3].GetComponent<CanvasGroup>().alpha = 0;
-                    abilitySelection[4].GetComponent<CanvasGroup>().alpha = 0;
+                    // Toggle inventory state only if no UI is open, or if this inventory is already open
+                    if (!uiWindowOpened || inventoryOpen)
+                    {
+                        inventoryOpen = !inventoryOpen;
+                        // Update UI visibility based on new state
+                        if (inventoryOpen)
+                        {
+                            // Open inventory UI
+                            uiElements[0].GetComponent<CanvasGroup>().alpha = 1;
+                            uiElements[0].GetComponent<CanvasGroup>().blocksRaycasts = true;
+                            Cursor.visible = true;
+                            uiWindowOpened = true;
                     
-                    i = 0;
+                            // Initialize inventory content
+                            CheckPowerIcons();
+                            _actionBar = StartCoroutine(ActionBar());
+                            Debug.Log("Inventory Opened");
+                        }
+                        else
+                        {
+                            // Close inventory UI
+                            StopCoroutine(_actionBar);
+                            CloseInventory();
+                            Debug.Log("Inventory Closed");
+                        }
+                    }
                 }
-                
+        
+                // Check for inconsistent state (uiWindowOpened flag is true but inventory is invisible)
+                if (uiWindowOpened && inventoryOpen && uiElements[0].GetComponent<CanvasGroup>().alpha < 0.5f)
+                {
+                    inventoryOpen = false;
+                    uiWindowOpened = false;
+                }
+        
+                yield return null;
+            }
+        }
+
+        private IEnumerator ActionBar()
+        {
+            while (true)
+            {
+                ChooseAbilitySelection();
                 yield return null;
             }
         }
@@ -175,6 +198,81 @@ namespace RPGGame
                 }
             }
         }
+        
+        public void OpenUIWindow(GameObject uiWindow)
+        {
+            // If a window is already open, close it first
+            if (uiWindowOpened && currentOpenWindow != null && currentOpenWindow != uiWindow)
+            {
+                CloseUIWindow(currentOpenWindow);
+            }
+        
+            // Open the new window
+            CanvasGroup canvasGroup = uiWindow.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 1f;
+                canvasGroup.interactable = true;
+                canvasGroup.blocksRaycasts = true;
+            }
+        
+            currentOpenWindow = uiWindow;
+            uiWindowOpened = true;
+        }
+    
+        // Method to close a specific UI window
+        public void CloseUIWindow(GameObject uiWindow)
+        {
+            CanvasGroup canvasGroup = uiWindow.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                canvasGroup.alpha = 0f;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+            }
+        
+            if (currentOpenWindow == uiWindow)
+            {
+                currentOpenWindow = null;
+                uiWindowOpened = false;
+            }
+        }
+        
+        private void CloseInventory()
+        {
+            // Hide main inventory UI
+            uiElements[0].GetComponent<CanvasGroup>().alpha = 0;
+            uiElements[0].GetComponent<CanvasGroup>().blocksRaycasts = false;
+    
+            // Hide all ability selection UIs
+            foreach (var selection in abilitySelection)
+            {
+                selection.GetComponent<CanvasGroup>().alpha = 0;
+                selection.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            }
+    
+            // Reset global UI state
+            uiWindowOpened = false;
+            Cursor.visible = false;
+        }
+
+    
+        // Toggle method - opens if closed, closes if open
+        public void ToggleUIWindow(GameObject uiWindow)
+        {
+            CanvasGroup canvasGroup = uiWindow.GetComponent<CanvasGroup>();
+            if (canvasGroup == null) return;
+        
+            if (canvasGroup.alpha < 0.5f)
+            {
+                OpenUIWindow(uiWindow);
+            }
+            else
+            {
+                CloseUIWindow(uiWindow);
+            }
+        }
+
         
         private void OnDisable()
         {

@@ -1,7 +1,8 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 namespace RPGGame
 {
@@ -9,12 +10,69 @@ namespace RPGGame
     {
         [SerializeField] private GameObject spellTemplatePrefab;
         [SerializeField] private Transform spellBookContent;
+        private UIController _uiC;
         [SerializeField] private AbilityContainer[] aC;
         [TagSelector] [SerializeField] private string fireTag;
         [TagSelector] [SerializeField] private string waterTag;
         [TagSelector] [SerializeField] private string earthTag;
         [TagSelector] [SerializeField] private string airTag;
         public List<PowerSelectionScript.PowerSelection> powers = new List<PowerSelectionScript.PowerSelection>();
+        private CanvasGroup canvasG;
+        [SerializeField] private InputActionAsset controllerSettings;
+        [SerializeField] private InputActionReference spellActionReference;
+
+
+        private void Awake()
+        {
+            _uiC = FindObjectOfType<UIController>();
+            canvasG = GetComponent<CanvasGroup>();
+        }
+
+        private void Start()
+        {
+            canvasG.alpha = 0;
+            canvasG.blocksRaycasts = false;
+            canvasG.interactable = false;
+        }
+
+        private void OnEnable()
+        {
+            if (spellActionReference != null)
+            {
+                spellActionReference.action.performed += OnSpellActionPerformed;
+                spellActionReference.action.Enable();
+            }
+
+        }
+
+        private void OnSpellActionPerformed(InputAction.CallbackContext context)
+        {
+
+            if (context.performed)
+            {
+                // Get reference to the UI GameObject (assuming this script is attached to it)
+                GameObject spellBookUI = this.gameObject;
+
+                // Use the centralized UI system
+                _uiC.ToggleUIWindow(spellBookUI);
+
+                // Additional logic when opened
+                if (spellBookUI.GetComponent<CanvasGroup>().alpha > 0.5f)
+                {
+                    // Set up spell book content, stop movement, etc.
+                    SetSpellBook();
+                    FindObjectOfType<CharacterMovement>()?.StopCharacterMovement();
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    // Cleanup when closed
+                    FindObjectOfType<CharacterMovement>()?.StartCharacterMovement();
+                    Cursor.visible = false;
+                }
+            }
+
+        }
 
         /// <summary>
         /// Updates the list of selected powers based on the tag of the provided button and configures the spell book accordingly.
@@ -114,6 +172,16 @@ namespace RPGGame
                     Destroy(spellBookContent.GetChild(0).gameObject);
                 }
             }
+        }
+
+        private void OnDisable()
+        {
+            if (spellActionReference != null)
+            {
+                spellActionReference.action.performed -= OnSpellActionPerformed;
+                spellActionReference.action.Disable();
+            }
+
         }
     }
 }

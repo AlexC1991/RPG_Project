@@ -9,14 +9,18 @@ namespace RPGGame
     {
         [TagSelector] [SerializeField] private string[] interactableTag;
         [SerializeField] private InputActionAsset controllerSettings;
+        private UIController _uiC;
         private CharacterMovement _characterMovement;
         private InputAction _interact;
         [SerializeField] private GameObject storeUI;
         private bool _storeChecker;
         private int i;
+        private CanvasGroup canvasG;
 
         private void Awake()
         {
+            _uiC = FindObjectOfType<UIController>();
+            canvasG = storeUI.GetComponent<CanvasGroup>();
             _interact = controllerSettings.FindActionMap("Player").FindAction("Interact");
         }
 
@@ -28,8 +32,8 @@ namespace RPGGame
         private void Start()
         {
             _characterMovement = FindObjectOfType<CharacterMovement>();
-            storeUI.GetComponent<CanvasGroup>().alpha = 0;
-            storeUI.GetComponent<CanvasGroup>().blocksRaycasts = false;     
+            canvasG.alpha = 0;
+            canvasG.blocksRaycasts = false;     
             _storeChecker = false;
             StartCoroutine(InteractionCheck());
         }
@@ -47,39 +51,28 @@ namespace RPGGame
         {
             while (true)
             {
+                Debug.Log("UI Window Checker " + _uiC.uiWindowOpened);
                 Debug.Log("interaction Number is " + i);
-                if (_interact.triggered)
+                if (_interact.triggered && _storeChecker)
                 {
-                    if (_storeChecker)
+                    // Use the toggle method from UIController
+                    if (canvasG.alpha < 0.5f)
                     {
-                        i += 1;
-                    }
-                    
-                    if (_storeChecker && i % 2 != 0)
-                    {
-                        storeUI.GetComponent<CanvasGroup>().alpha = 1;
-                        storeUI.GetComponent<CanvasGroup>().blocksRaycasts = true;  
-                        Debug.Log("Store UI Canvas Group Alpha is 1");
+                        // Open store UI
+                        _uiC.OpenUIWindow(storeUI);
                         _characterMovement.StopCharacterMovement();
                         Cursor.visible = true;
                     }
-
-                    if (i % 2 == 0)
+                    else
                     {
-                        storeUI.GetComponent<CanvasGroup>().alpha = 0;
-                        storeUI.GetComponent<CanvasGroup>().blocksRaycasts = false;  
-                        Debug.Log("Store UI Canvas Group Alpha is 0");
+                        // Close store UI
+                        _uiC.CloseUIWindow(storeUI);
                         _characterMovement.StartCharacterMovement();
                         Cursor.visible = false;
                     }
-
-                    if (i > 2)
-                    {
-                        i = 0;
-                    }
                 }
-
                 yield return null;
+
             }
         }
 
