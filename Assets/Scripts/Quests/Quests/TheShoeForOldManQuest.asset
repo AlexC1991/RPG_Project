@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08519334e3b4794d8365bcb1b267eae, type: 3}
+  m_Name: TheShoeForOldManQuest
+  m_EditorClassIdentifier: 
+  questData:
+    questObjectives:
+    - {fileID: 2179505178412198388, guid: 699ffe2ad5890244b97873fa250f354a, type: 3}
+    questObjectiveAmount: 1
+    prerequisiteQuestID: []
+    npcQuestDialogue:
+    - Hello dear traveller, do you care to help me ?
+    - Amazing! I just need you to collect something for me and I will reward you
+      dearly.
+    - Yes there is a store in town that has my new shoes I can't walk there due to
+      my feet. If you collect it I will reward you with some left over coins I have
+      in my pocket.
+    playerQuestDialogue:
+    - Of course ! how may I help you ?
+    - Sure, what and where do you need me to go and collect for you.
+    - Sounds good to me.
+    questName: The Shoe For Old Man Quest
+    questLocation: {fileID: 0}
+    questDescription: You will have to go down in town to the shoe shop located on
+      your map and collect the shoes and bring it back.
+    questType: 0
+    questStatus: 0
+    questObjective: 1
+    questReward: 0
+    secondQuestReward: 1
+    questTimeLimit: 0
+    questLevel: 0
+    questID: OLDMQ1
+    questRewardIcon: {fileID: 0}
+    questRewardIcon2: {fileID: 0}
+    questRewardAmount: 50
+    questRewardAmount2: 0
+    questExpReward: 10
+    rewardScalingFactor: 0
+    questFailureCondition: 0
+    mandatoryConditions:
+      mandatoryQuestDescription:
+      - Shoes To Collect
+      questConditions: 1
+    optionalConditions:
+      optinalQuestDescription: []
+      questConditions: 0
+    questReputationImpactFaction: 0
+    reputationImpactAmount: 0
+    questFailedCount: 0
+    questEnvironmentRequirement: 5

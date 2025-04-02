@@ -44,7 +44,7 @@ namespace RPGGame
                     break;
 
                 case PowerSelectionScript.PowerType.AOE:
-                    DrawAOEProperties(ref script.powerData.aeoType);
+                    DrawAoeProperties(ref script.powerData.aeoType);
                     break;
             }
 
@@ -70,7 +70,7 @@ namespace RPGGame
             buff.buffValue = EditorGUILayout.FloatField("Buff Value", buff.buffValue);
         }
 
-        private void DrawAOEProperties(ref PowerSelectionScript.AEOType aoe)
+        private void DrawAoeProperties(ref PowerSelectionScript.AEOType aoe)
         {
             aoe.radius = EditorGUILayout.FloatField("Radius", aoe.radius);
             aoe.duration = EditorGUILayout.FloatField("Duration", aoe.duration);

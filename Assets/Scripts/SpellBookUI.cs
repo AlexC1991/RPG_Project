@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 namespace RPGGame
 {
     public class SpellBookUI : MonoBehaviour
@@ -42,7 +43,6 @@ namespace RPGGame
                 spellActionReference.action.performed += OnSpellActionPerformed;
                 spellActionReference.action.Enable();
             }
-
         }
 
         private void OnSpellActionPerformed(InputAction.CallbackContext context)
@@ -81,7 +81,7 @@ namespace RPGGame
         public void SelectedPower(Button button)
         {
             powers.Clear();
-            
+
             if (button.transform.tag == fireTag)
             {
                 foreach (var ability in aC)
@@ -157,16 +157,18 @@ namespace RPGGame
                 spell.transform.GetChild(0).GetComponent<Image>().sprite = power.icon;
                 spell.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = power.name;
                 spell.transform.name = power.name + " Spell";
-                
-                
+
+
                 if (power.abilityPrice == 0)
                 {
                     spell.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Free";
                 }
                 else
                 {
-                    spell.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = power.abilityPrice.ToString("F2");
+                    spell.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text =
+                        power.abilityPrice.ToString("F2");
                 }
+
                 if (spellBookContent.childCount > powers.Count)
                 {
                     Destroy(spellBookContent.GetChild(0).gameObject);
@@ -181,7 +183,11 @@ namespace RPGGame
                 spellActionReference.action.performed -= OnSpellActionPerformed;
                 spellActionReference.action.Disable();
             }
-
         }
     }
 }
+            
+
+        
+    
+

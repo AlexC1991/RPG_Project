@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2f70c5dc93703488a481c3e56e05a8, type: 3}
+  m_Name: QuestItem Shoes 2
+  m_EditorClassIdentifier: 
+  itemData:
+    id: QIShoesOMQ3
+    name: Old Man Shoes Three
+    description: This is used for the quest of which needs to be dropped off to the
+      old man for a reward.
+    icon: {fileID: 21300000, guid: e59474194af4f124fa8a9926f73e6c71, type: 3}
+    itemPrefab: {fileID: 2179505178412198388, guid: 699ffe2ad5890244b97873fa250f354a, type: 3}
+    price: 0
+    quantity: 1
+    isStackable: 0
+    isConsumable: 0
+    isEquippable: 0
+    isQuestItem: 1

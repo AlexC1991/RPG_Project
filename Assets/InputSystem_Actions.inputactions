@@ -148,6 +148,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Bag",
+                    "type": "Button",
+                    "id": "ece83fac-78b2-484d-81ed-db8ff157c14c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -610,6 +619,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "SpellBook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b109c0af-71b9-4f0f-a665-2b054b24124e",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Bag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

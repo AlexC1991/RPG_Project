@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +8,8 @@ namespace RPGGame
     {
         [TagSelector] [SerializeField] private string[] interactableTag;
         [SerializeField] private InputActionAsset controllerSettings;
+        [SerializeField] private InventoryManager inventoryManager;
+        private ItemScript itemScript;
         private UIController _uiC;
         private CharacterMovement _characterMovement;
         private InputAction _interact;
@@ -45,6 +46,21 @@ namespace RPGGame
                 _storeChecker = true;
                 Debug.Log("Can Interact With Store");
             }
+            else if (other.CompareTag(interactableTag[1]))
+            {
+                AddToInventory(other.gameObject);
+            }
+        }
+
+        private void AddToInventory(GameObject item)
+        {
+            itemScript = item.GetComponent<ItemScript>();
+            inventoryManager.AddToInventory(item, itemScript.itemI.itemData.quantity, itemScript.itemI.itemData.icon);
+        }
+
+        public void DestroyItem(GameObject item)
+        {
+            Destroy(item,0.2f);
         }
 
         private IEnumerator InteractionCheck()
