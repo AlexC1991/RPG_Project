@@ -55,7 +55,7 @@ namespace RPGGame
         private void AddToInventory(GameObject item)
         {
             itemScript = item.GetComponent<ItemScript>();
-            inventoryManager.AddToInventory(item, itemScript.itemI.itemData.quantity, itemScript.itemI.itemData.icon);
+            StartCoroutine(inventoryManager.AddToInventory(item, itemScript.itemI.itemData.quantity, itemScript.itemI.itemData.icon));
         }
 
         public void DestroyItem(GameObject item)
