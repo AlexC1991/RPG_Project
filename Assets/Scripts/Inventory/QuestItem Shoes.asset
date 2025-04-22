@@ -23,5 +23,5 @@ MonoBehaviour:
     quantity: 1
     isStackable: 0
     isConsumable: 0
-    isEquippable: 0
+    isEquippable: 1
     isQuestItem: 1

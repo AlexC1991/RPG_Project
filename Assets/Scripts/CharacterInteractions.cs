@@ -48,6 +48,7 @@ namespace RPGGame
             }
             else if (other.CompareTag(interactableTag[1]))
             {
+                Debug.Log("Found Item");
                 AddToInventory(other.gameObject);
             }
         }
@@ -55,7 +56,8 @@ namespace RPGGame
         private void AddToInventory(GameObject item)
         {
             itemScript = item.GetComponent<ItemScript>();
-            StartCoroutine(inventoryManager.AddToInventory(item, itemScript.itemI.itemData.quantity, itemScript.itemI.itemData.icon));
+            StartCoroutine(inventoryManager.AddToInventory(item, itemScript.itemI.itemData.quantity, 
+                itemScript.itemI.itemData.icon));
         }
 
         public void DestroyItem(GameObject item)

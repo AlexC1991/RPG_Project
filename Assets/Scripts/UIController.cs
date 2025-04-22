@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
+using System.Text;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace RPGGame
 {
-    public class UIController : MonoBehaviour
+    public class UIController : MonoBehaviour, IDropHandler
     {
         [SerializeField] private InputActionAsset controllerSettings;
         [SerializeField] private GameObject[] uiElements;
         [SerializeField] public GameObject[] powerIcons;
-        [SerializeField] private GameObject[] abilitySelection;
+        public GameObject[] abilitySelection;
         [SerializeField] PlayerPowers pP;
         private AbilityActivation abilityActivation;
         private InputAction openInventory;
@@ -26,8 +28,9 @@ namespace RPGGame
         public bool uiWindowOpened;
         private GameObject currentOpenWindow;
         private Coroutine _actionBar;
+        private GameObject powerI;
 
-        
+
         private void Awake()
         { 
             openInventory = controllerSettings.FindActionMap("Player").FindAction("Inventory");
@@ -282,6 +285,54 @@ namespace RPGGame
             abilityThree.Disable();
             abilityFour.Disable();
             abilityFive.Disable();
+        }
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            GameObject droppedGO = eventData.pointerDrag;
+            DraggableItemScript draggedItem = droppedGO.GetComponent<DraggableItemScript>();
+
+            if (draggedItem != null && draggedItem.GetComponentInParent<ItemScript>().itemI.itemData.isEquippable)
+            {
+                for (int i = 0; i < abilitySelection.Length; i++)
+                {
+                    if (abilitySelection[i].GetComponent<CanvasGroup>().alpha > 0)
+                    {
+                        // Clear previous item if exists
+                        if (powerIcons[i].transform.childCount > 0)
+                        {
+                            Destroy(powerIcons[i].transform.GetChild(0).gameObject);
+                        }
+
+                        // Set the dragged item as a child of the power icon
+                        droppedGO.transform.SetParent(powerIcons[i].transform);
+                        droppedGO.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+                        // Update visuals
+                        powerIcons[i].GetComponent<Image>().sprite =
+                            draggedItem.GetComponentInParent<ItemScript>().itemI.itemData.icon;
+                        powerIcons[i].GetComponent<CanvasGroup>().alpha = 1f;
+
+                        // Add to player powers
+                        PowerSelectionScript.PowerSelection newPower = new PowerSelectionScript.PowerSelection
+                        {
+                            id = draggedItem.GetComponentInParent<ItemScript>().itemI.itemData.id,
+                            icon = draggedItem.GetComponentInParent<ItemScript>().itemI.itemData.icon
+                        };
+
+                        if (i < pP.playersPowers.Count)
+                        {
+                            pP.playersPowers[i] = newPower;
+                        }
+                        else
+                        {
+                            pP.playersPowers.Add(newPower);
+                        }
+
+                        break;
+                    }
+                }
+            }
         }
     }
 }

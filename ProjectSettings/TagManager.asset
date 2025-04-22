@@ -11,6 +11,8 @@ TagManager:
   - EarthPower
   - AirPower
   - InventoryItem
+  - abilitySlot
+  - indicatorGlow
   layers:
   - Default
   - TransparentFX
