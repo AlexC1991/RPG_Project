@@ -8,7 +8,7 @@ namespace RPGGame
     public class PlayerPowers : MonoBehaviour
     {
         public List<PowerSelectionScript.PowerSelection> playersPowers = new List<PowerSelectionScript.PowerSelection>();
-        [SerializeField] private UIController uiC;
+        [SerializeField] private AbilityBarScript uiC;
         private void Start()
         {
             playersPowers.Clear();
@@ -16,9 +16,9 @@ namespace RPGGame
 
         public void UpdateInventoryBar()
         {
-            for (int i = 0; i < playersPowers.Count && i < uiC.powerIcons.Length; i++)
+            for (int i = 0; i < playersPowers.Count && i < uiC.abilitySelection.Length; i++)
             {
-                uiC.powerIcons[i].GetComponent<Image>().sprite = playersPowers[i].icon;
+                uiC.abilitySelection[i].GetComponent<Image>().sprite = playersPowers[i].icon;
             }
         }
     }

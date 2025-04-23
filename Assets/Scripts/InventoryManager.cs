@@ -10,7 +10,7 @@ namespace RPGGame
     public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private GameObject inventoryPrefab;
-        [SerializeField] private UIController uiC;
+        [SerializeField] private AbilityBarScript uiC;
         [SerializeField] private GameObject inventoryUI;
         [SerializeField] private GameObject uiParent;
         [SerializeField] private CharacterInteractions cInteraction;

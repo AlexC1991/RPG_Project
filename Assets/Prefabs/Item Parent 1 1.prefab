@@ -307,7 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1e1563818a93043840446e5947b7cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityTag: indicatorGlow
+  originalParent: {fileID: 0}
+  abilityTag: abilitySlot
 --- !u!1 &6817861846754748023
 GameObject:
   m_ObjectHideFlags: 0

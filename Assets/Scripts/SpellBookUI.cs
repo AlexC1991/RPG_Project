@@ -11,7 +11,7 @@ namespace RPGGame
     {
         [SerializeField] private GameObject spellTemplatePrefab;
         [SerializeField] private Transform spellBookContent;
-        private UIController _uiC;
+        private AbilityBarScript _uiC;
         [SerializeField] private AbilityContainer[] aC;
         [TagSelector] [SerializeField] private string fireTag;
         [TagSelector] [SerializeField] private string waterTag;
@@ -25,7 +25,7 @@ namespace RPGGame
 
         private void Awake()
         {
-            _uiC = FindObjectOfType<UIController>();
+            _uiC = FindObjectOfType<AbilityBarScript>();
             canvasG = GetComponent<CanvasGroup>();
         }
 

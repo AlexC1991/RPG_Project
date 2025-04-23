@@ -10,7 +10,7 @@ namespace RPGGame
         [SerializeField] private InputActionAsset controllerSettings;
         [SerializeField] private InventoryManager inventoryManager;
         private ItemScript itemScript;
-        private UIController _uiC;
+        private AbilityBarScript _uiC;
         private CharacterMovement _characterMovement;
         private InputAction _interact;
         [SerializeField] private GameObject storeUI;
@@ -20,7 +20,7 @@ namespace RPGGame
 
         private void Awake()
         {
-            _uiC = FindObjectOfType<UIController>();
+            _uiC = FindObjectOfType<AbilityBarScript>();
             canvasG = storeUI.GetComponent<CanvasGroup>();
             _interact = controllerSettings.FindActionMap("Player").FindAction("Interact");
         }
