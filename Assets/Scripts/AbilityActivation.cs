@@ -12,6 +12,7 @@ namespace RPGGame
         private HashSet<string> abilitiesOnCooldown = new HashSet<string>();
         private Coroutine aoeEffect;
         private float aoeDuratio;
+        [SerializeField] private Animator playerAnimaton;
 
         private void Awake()
         {
@@ -33,36 +34,71 @@ namespace RPGGame
             {
                 if (power.id == idAbility)
                 {
-                    switch (power.powerType)
-                    {
-                        case(PowerSelectionScript.PowerType.Projectile):
-                        // Instantiate and activate the ability
-                       GameObject ability = Instantiate(power.abilityPrefabs, shootingPoint.position, Quaternion.identity); ability.GetComponent<Rigidbody>().AddForce(transform.forward * power.projectileType.range, ForceMode.Impulse);
-                       Destroy(ability, power.projectileType.range);
+                    // Start a coroutine that handles animation and delayed ability activation
+                    StartCoroutine(PlayAnimationAndActivateAbility(power, idAbility));
+                    return; // Exit after finding and using the ability
 
-               
-                       StartCoroutine(StartAbilityCooldown(idAbility, power.coolDownTimer));
-
-                       Debug.Log($"Ability {idAbility} used! Cooldown started: {power.coolDownTimer} seconds.");
-                      break;
-                       
-                        case(PowerSelectionScript.PowerType.Buff):
-                            ApplyBuffToPlayer(power);
-                            StartCoroutine(StartAbilityCooldown(idAbility, power.coolDownTimer));
-                            Debug.Log($"Activated Buff Ability: {power.name}");
-                            break;
-                      
-                        case(PowerSelectionScript.PowerType.AOE):
-                            ApplyAOEEffect(power);
-                            StartCoroutine(StartAbilityCooldown(idAbility, power.coolDownTimer));
-                            Debug.Log($"Activated AOE Ability: {power.name}");
-                            break;
-
-                        default:
-                            Debug.LogWarning($"Unknown ability type: {power.powerType}");
-                            break;
-                    }
                 }
+            }
+        }
+
+        private IEnumerator PlayAnimationAndActivateAbility(PowerSelectionScript.PowerSelection power, string idAbility)
+        {
+            // Store the original rotation before playing animation
+            Quaternion originalRotation = Camera.main != null ? Camera.main.transform.rotation : transform.rotation;
+
+            // Play the animation if it exists
+            if (power.abilityAnimationClip != null && playerAnimaton != null)
+            {
+                // Set animator to play animation without affecting rotation
+                playerAnimaton.applyRootMotion = false;
+                playerAnimaton.Play(power.abilityAnimationClip.name);
+                Debug.Log($"Playing animation: {power.abilityAnimationClip.name}");
+
+                // Calculate delay time based on animation length
+                float delayTime = power.abilityAnimationClip.length * 0.5f;
+
+                // Wait for the animation to play partially before activating the ability
+                yield return new WaitForSeconds(delayTime);
+            }
+
+            // Activate the ability based on its type
+            switch (power.powerType)
+            {
+                case (PowerSelectionScript.PowerType.Projectile):
+                    // Get the camera's forward direction for aiming
+                    Vector3 shootDirection = Camera.main != null ? Camera.main.transform.forward : transform.forward;
+
+                    // Use the original shooting direction
+                    Quaternion projectileRotation = Quaternion.LookRotation(shootDirection);
+
+                    // Instantiate the projectile with the correct rotation
+                    GameObject ability = Instantiate(power.abilityPrefabs, shootingPoint.position, projectileRotation);
+
+                    // Add force in the shooting direction
+                    ability.GetComponent<Rigidbody>()
+                        .AddForce(shootDirection * power.projectileType.speed, ForceMode.Impulse);
+
+                    // Set the destruction timer
+                    Destroy(ability, power.projectileType.range);
+
+                    StartCoroutine(StartAbilityCooldown(idAbility, power.coolDownTimer));
+                    break;
+
+                // Other cases remain unchanged
+                case (PowerSelectionScript.PowerType.Buff):
+                    ApplyBuffToPlayer(power);
+                    StartCoroutine(StartAbilityCooldown(idAbility, power.coolDownTimer));
+                    break;
+
+                case (PowerSelectionScript.PowerType.AOE):
+                    ApplyAOEEffect(power);
+                    StartCoroutine(StartAbilityCooldown(idAbility, power.coolDownTimer));
+                    break;
+
+                default:
+                    Debug.LogWarning($"Unknown ability type: {power.powerType}");
+                    break;
             }
         }
 

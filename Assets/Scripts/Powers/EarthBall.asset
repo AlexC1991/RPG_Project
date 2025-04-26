@@ -21,7 +21,7 @@ MonoBehaviour:
     coolDownTimer: 3
     icon: {fileID: 21300000, guid: fff1d5dc865b34249b260fc4e2e4d6cb, type: 3}
     abilityPrefabs: {fileID: 3034341003016815578, guid: d51dd8374dad2b841919f1b2f556e3e8, type: 3}
-    abilityAnimationClip: {fileID: 0}
+    abilityAnimationClip: {fileID: 7400000, guid: 1685eb2fe794ba04ebeb58823dc8ba78, type: 2}
     abilityPrice: 0
     projectileType:
       range: 2
@@ -33,5 +33,6 @@ MonoBehaviour:
       buffValue: 0
     aeoType:
       radius: 0
-      damage: 0
+      abilityValue: 0
       buffAbility: 0
+      duration: 0

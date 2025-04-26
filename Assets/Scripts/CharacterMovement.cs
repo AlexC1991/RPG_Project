@@ -8,11 +8,12 @@ namespace RPGGame
     {
         [SerializeField] private float walkSpeed = 5f;
         [SerializeField] private float runSpeed = 5f;
-        private CharacterController _characterController;
+        [SerializeField] private CharacterController _characterController;
         [SerializeField] private float gravity = -20f;
         [SerializeField] private InputActionAsset controllerSettings;
         private InputAction _moveAction;
         private Coroutine _characterStart;
+        private InputAction _sprintAction;
         private Vector2 _currentRotation;
         [SerializeField] private float mouseSensitivity;
         private Vector2 _rotationVelocity;
@@ -20,16 +21,21 @@ namespace RPGGame
         [SerializeField] private float maxYAxisUp;
         [SerializeField] private float maxYAxisDown;
         private float _maxYaxis;
+        [SerializeField] private Animator characterAnimation;
+        [SerializeField] private string movementParamName = "Speed";
+        private float currentSpeed = 0f;
 
         private void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            //_characterController = GetComponent<CharacterController>();
             _moveAction = controllerSettings.FindActionMap("Player").FindAction("Move");
+            _sprintAction = controllerSettings.FindActionMap("Player").FindAction("Sprint");
         }
 
         private void OnEnable()
         {
             _moveAction.Enable();
+            if (_sprintAction != null) _sprintAction.Enable();
         }
 
         private void Start()
@@ -37,11 +43,17 @@ namespace RPGGame
             StartCharacterMovement();
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
+            _currentRotation = new Vector2(0f, transform.eulerAngles.y);
         }
 
         public void StopCharacterMovement()
         {
-            StopCoroutine(_characterStart);
+            if (_characterStart != null)
+                StopCoroutine(_characterStart);
+                
+            // Reset animation when stopping
+            if (characterAnimation != null)
+                characterAnimation.SetFloat(movementParamName, 0);
         }
 
         public void StartCharacterMovement()
@@ -51,10 +63,17 @@ namespace RPGGame
 
         private IEnumerator StartWalking()
         {
+            transform.localRotation = Quaternion.Euler(0f, _currentRotation.y, 0f);
+            yield return null;
+
+            // Create a velocity vector to track vertical movement
+            Vector3 verticalVelocity = new Vector3(0, -0.5f, 0);
+
             while (true)
             {
                 if (Camera.main != null)
                 {
+                    // Camera direction vectors
                     Vector3 cameraForward = Camera.main.transform.forward;
                     Vector3 cameraRight = Camera.main.transform.right;
 
@@ -63,39 +82,61 @@ namespace RPGGame
                     cameraForward.Normalize();
                     cameraRight.Normalize();
 
+                    // Input handling
                     Vector2 twoDMovement = _moveAction.ReadValue<Vector2>();
-                    Vector3 movementWasd = (cameraRight * twoDMovement.x + cameraForward * twoDMovement.y) *
-                                           (walkSpeed * Time.deltaTime);
+                    bool isSprinting = _sprintAction != null && _sprintAction.ReadValue<float>() > 0.5f;
+                    float currentMoveSpeed = isSprinting ? runSpeed : walkSpeed;
+
+                    // Mouse look
                     Vector2 lookInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
                     _currentRotation.y += lookInput.x * mouseSensitivity;
-                    _currentRotation.x -= lookInput.y * mouseSensitivity; // Invert vertical look
-                    _currentRotation.x = Mathf.Clamp(_currentRotation.x, -90f, 90f); // Clamp vertical rotation
+                    _currentRotation.x -= lookInput.y * mouseSensitivity;
+                    _currentRotation.x = Mathf.Clamp(_currentRotation.x, maxYAxisDown, maxYAxisUp);
 
-                    Vector2 smoothRotation = Vector2.SmoothDamp(_currentRotation, _currentRotation,
-                        ref _rotationVelocity, rotationSmoothTime);
-                    _maxYaxis = Mathf.Clamp(smoothRotation.x, maxYAxisDown, maxYAxisUp);
-                    transform.localRotation = Quaternion.Euler(_maxYaxis, smoothRotation.y, 0f);
+                    // Apply rotation
+                    transform.parent.localRotation = Quaternion.Euler(0, _currentRotation.y, 0);
+                    Camera.main.transform.localRotation = Quaternion.Euler(_currentRotation.x, 0, 0);
 
+                    // Calculate horizontal movement
+                    Vector3 moveDirection = (cameraRight * twoDMovement.x + cameraForward * twoDMovement.y).normalized;
+                    Vector3 horizontalMovement = moveDirection * (currentMoveSpeed * Time.deltaTime);
+
+                    // Handle animation
+                    if (characterAnimation != null)
+                    {
+                        float targetSpeed = twoDMovement.magnitude <= 0.1f ? 0 : (isSprinting ? 1f : 0.5f);
+                        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 10f);
+                        characterAnimation.SetFloat(movementParamName, currentSpeed);
+                    }
+
+                    // Apply gravity properly
                     if (_characterController.isGrounded)
                     {
-                        movementWasd.y = -0.5f; // Small downward force when grounded
+                        // Reset vertical velocity when grounded
+                        verticalVelocity.y = -0.5f;
                     }
                     else
                     {
-                        movementWasd.y += Physics.gravity.y * Time.deltaTime;
+                        // Apply gravity to vertical velocity
+                        verticalVelocity.y += gravity * Time.deltaTime;
                     }
 
-                    Vector3 finalMovement = movementWasd + new Vector3(0, movementWasd.y * Time.deltaTime, 0);
-                    _characterController.Move(finalMovement);
+                    // Combine horizontal movement with vertical velocity
+                    Vector3 movement = new Vector3(horizontalMovement.x, verticalVelocity.y * Time.deltaTime,
+                        horizontalMovement.z);
+
+                    // Move character
+                    _characterController.Move(movement);
                 }
 
                 yield return null;
             }
         }
-
+        
         private void OnDisable()
         {
             _moveAction.Disable();
+            if (_sprintAction != null) _sprintAction.Disable();
         }
     }
 }

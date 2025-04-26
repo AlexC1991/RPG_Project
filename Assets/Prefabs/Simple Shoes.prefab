@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 47c0a5c15bc07a64babfd68d1ddd5389, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aec9cdd23050f3046867481fa5872b09, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 47c0a5c15bc07a64babfd68d1ddd5389, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8dd2e08a32fa38e468791c8e9d4e21bf, type: 2}
     - target: {fileID: 919132149155446097, guid: 47c0a5c15bc07a64babfd68d1ddd5389, type: 3}
       propertyPath: m_Name
       value: Simple Shoes
@@ -116,7 +124,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: -0.014623182, y: -0.009181298, z: 0.0042924522}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-2909585897558588988
 MonoBehaviour:
   m_ObjectHideFlags: 0
