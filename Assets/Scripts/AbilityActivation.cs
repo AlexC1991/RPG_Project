@@ -56,7 +56,7 @@ namespace RPGGame
                 Debug.Log($"Playing animation: {power.abilityAnimationClip.name}");
 
                 // Calculate delay time based on animation length
-                float delayTime = power.abilityAnimationClip.length * 0.5f;
+                float delayTime = power.abilityAnimationClip.length * 0.6f;
 
                 // Wait for the animation to play partially before activating the ability
                 yield return new WaitForSeconds(delayTime);
@@ -67,7 +67,7 @@ namespace RPGGame
             {
                 case (PowerSelectionScript.PowerType.Projectile):
                     // Get the camera's forward direction for aiming
-                    Vector3 shootDirection = Camera.main != null ? Camera.main.transform.forward : transform.forward;
+                    Vector3 shootDirection = Camera.main.transform.forward;
 
                     // Use the original shooting direction
                     Quaternion projectileRotation = Quaternion.LookRotation(shootDirection);

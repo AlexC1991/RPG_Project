@@ -49,6 +49,7 @@ namespace RPGGame
         [System.Serializable]
         public struct ProjectileType
         {
+            public bool trackingProjectile;
             public float range;
             public float speed;
             public float damage;

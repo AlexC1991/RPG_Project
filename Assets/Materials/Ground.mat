@@ -21,46 +21,20 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ground
-  m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - N_F_DDMD_ON
-  - N_F_EAL_ON
-  - N_F_ESSAO_ON
-  - N_F_O_ON
-  - N_F_RDC_ON
-  - N_F_RELGI_ON
-  - N_F_SS_ON
-  - N_F_TRANSAFFSHA_ON
-  m_InvalidKeywords:
-  - N_F_TRANSAFFSHA
-  - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
-  - _GIFLATSHADE_OFF
-  - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
-  - _LIGHTAFFECTOUTLINECOLOR_OFF
-  - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
-  - _LIGHTAFFECTSHADOW_OFF
-  - _LIGHTFALLOFFAFFECTSHADOWT_OFF
-  - _LIGIGNOYNORDIR_OFF
-  - _MCIALO_OFF
-  - _MVCOL_OFF
-  - _OUTLINEWIDTHAFFECTEDBYVIEWDISTANCE_OFF
-  - _PSGLOTEX_OFF
-  - _SELFSHADOWAFFECTEDBYLIGHTSHADOWSTRENGTH_OFF
-  - _SHOWNORMAL_OFF
-  - _SPECMODE_OFF
-  - _STIL_OFF
-  - _TEXTUREPATTERNSTYLE_OFF
-  - _USESECONDARYCUTOUT_OFF
-  - _VERTEXCOLORBLUEAFFECTOUTLINEWITDH_OFF
-  - _VERTEXCOLORGREENCONTROLSELFSHADOWTHRESHOLD_OFF
-  - _VERTEXCOLORREDCONTROLSMOOTHOBJECTNORMAL_OFF
-  m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  - _EMISSION
+  - _NORMALMAP
+  - _PARALLAXMAP
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -68,11 +42,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 0c62b08b30bdf8c43aa2f77944a37bf2, type: 3}
+        m_Scale: {x: 0.5, y: 0.6}
+        m_Offset: {x: 0.12, y: 0.09}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fbe7a7168b3773e45a3f9559edd16fa8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -88,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0c62b08b30bdf8c43aa2f77944a37bf2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FReflection:
@@ -108,9 +82,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a594855b6aeb1db408566c1aa85dcdbc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 0c62b08b30bdf8c43aa2f77944a37bf2, type: 3}
+        m_Scale: {x: 0.5, y: 0.6}
+        m_Offset: {x: 0.12, y: 0.09}
     - _MaskGloss:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -132,7 +106,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: fbe7a7168b3773e45a3f9559edd16fa8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -148,7 +122,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2e2748c2dd6cf6c4b924e7fb161de71d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondaryCutout:
@@ -190,6 +164,7 @@ Material:
     - _BleModSour: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
+    - _BlendOp: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -211,7 +186,7 @@ Material:
     - _DstBlendAlpha: 0
     - _DynamicNoisyOutline: 0
     - _EnvironmentReflections: 1
-    - _EnvironmentalLightingIntensity: 1
+    - _EnvironmentalLightingIntensity: 2
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
@@ -239,7 +214,7 @@ Material:
     - _MVCOL: 0
     - _MaiColPo: 0.8
     - _MaxFadDistance: 2
-    - _Metallic: 0.507
+    - _Metallic: 0.6
     - _MinFadDistance: 0
     - _MixMainTexToOutline: 1
     - _N_F_ANIS: 0
@@ -260,10 +235,10 @@ Material:
     - _N_F_MSSOLTFO: 0
     - _N_F_NFD: 0
     - _N_F_NLASOBF: 0
-    - _N_F_NM: 0
+    - _N_F_NM: 1
     - _N_F_O: 1
     - _N_F_OFLMB: 0
-    - _N_F_PA: 0
+    - _N_F_PA: 1
     - _N_F_PT: 0
     - _N_F_R: 0
     - _N_F_RDC: 1
@@ -283,7 +258,7 @@ Material:
     - _NoisTexInten: 1
     - _NoiseSize: 100
     - _NoisyOutlineIntensity: 0.613
-    - _NormalMapIntensity: 1
+    - _NormalMapIntensity: 45
     - _OcclusionStrength: 1
     - _Opacity: 1
     - _Oper: 0
@@ -297,7 +272,7 @@ Material:
     - _PASmooTrans: 1
     - _PSGLOTEX: 0
     - _PTexturePower: 1
-    - _Parallax: 0.005
+    - _Parallax: 0.05
     - _PointSpotlightIntensity: 0
     - _PresAdju: 1
     - _QueueOffset: 0
@@ -316,6 +291,7 @@ Material:
     - _SPECIN: 1
     - _SPECMODE: 0
     - _STIL: 0
+    - _SampleGI: 0
     - _Saturation: 1
     - _SelfLitHighContrast: 1
     - _SelfLitIntensity: 0
@@ -363,10 +339,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4433962, g: 0.3340869, b: 0, a: 1}
-    - _Color: {r: 0.44339618, g: 0.33408684, b: 0, a: 1}
+    - _BaseColor: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
+    - _Color: {r: 0.95283014, g: 0.95283014, b: 0.95283014, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightColor: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
@@ -376,7 +352,7 @@ Material:
     - _ObjectRight: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
-    - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OverallShadowColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
     - _PrevPosition: {r: 0, g: 0, b: 0, a: 0}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}

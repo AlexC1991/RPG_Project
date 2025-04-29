@@ -57,6 +57,7 @@ namespace RPGGame
 
         private void DrawProjectileProperties(ref PowerSelectionScript.ProjectileType projectile)
         {
+            projectile.trackingProjectile = EditorGUILayout.Toggle("Tracking Projectile", projectile.trackingProjectile);
             projectile.range = EditorGUILayout.FloatField("Range", projectile.range);
             projectile.speed = EditorGUILayout.FloatField("Speed", projectile.speed);
             projectile.damage = EditorGUILayout.FloatField("Damage", projectile.damage);
