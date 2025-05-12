@@ -14,6 +14,7 @@ Material:
   m_ValidKeywords:
   - N_F_DDMD_ON
   - N_F_EAL_ON
+  - N_F_ESSAO_ON
   - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
@@ -28,7 +29,6 @@ Material:
   - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
   - _LIGHTAFFECTSHADOW_OFF
   - _LIGHTFALLOFFAFFECTSHADOWT_OFF
-  - _LIGIGNOYNORDIR_OFF
   - _MCIALO_OFF
   - _MIXMAINTEXTOOUTLINE_OFF
   - _MVCOL_OFF
@@ -215,7 +215,7 @@ Material:
     - _GlossyReflections: 0
     - _Glow_Edge_Width: 1
     - _HighlightColorPower: 1
-    - _LigIgnoYNorDir: 0
+    - _LigIgnoYNorDir: 1
     - _LightAffectOutlineColor: 0
     - _LightAffectRimLightColor: 0
     - _LightAffectShadow: 0
@@ -238,7 +238,7 @@ Material:
     - _N_F_DCS: 0
     - _N_F_DDMD: 1
     - _N_F_EAL: 1
-    - _N_F_ESSAO: 0
+    - _N_F_ESSAO: 1
     - _N_F_FR: 0
     - _N_F_GLO: 0
     - _N_F_GLOT: 0
@@ -276,7 +276,7 @@ Material:
     - _Opacity: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
-    - _OutlineWidth: 0.005
+    - _OutlineWidth: 0.008
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 0
     - _OverallShadowColorPower: 1
@@ -311,11 +311,11 @@ Material:
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
     - _SelfShadowRealTimeShadowColorPower: 1
-    - _SelfShadowRealtimeShadowIntensity: 1
+    - _SelfShadowRealtimeShadowIntensity: 0.9
     - _SelfShadowShadowTAtViewDirection: 0
     - _SelfShadowThreshold: 0.93
     - _ShadowColorTexturePower: 0
-    - _ShadowHardness: 0
+    - _ShadowHardness: 0.141
     - _ShadowTColorPower: 1
     - _ShadowTHardness: 1
     - _ShadowTIntensity: 1

@@ -73,7 +73,7 @@ namespace RPGGame
         
         public PowerSelection powerData;
         
-        private void OnValidate()
+        /*private void OnValidate()
         {
 #if UNITY_EDITOR
             if (!string.IsNullOrEmpty(powerData.name))
@@ -86,6 +86,6 @@ namespace RPGGame
                 }
             }
 #endif
-        }
+        }*/
     }
 }
