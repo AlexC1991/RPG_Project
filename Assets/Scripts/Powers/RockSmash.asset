@@ -24,8 +24,9 @@ MonoBehaviour:
     abilityAnimationClip: {fileID: 7400000, guid: 1685eb2fe794ba04ebeb58823dc8ba78, type: 2}
     abilityPrice: 0
     projectileType:
+      trackingProjectile: 0
       range: 5
-      speed: 9
+      speed: 10
       damage: 5
     buffType:
       duration: 0

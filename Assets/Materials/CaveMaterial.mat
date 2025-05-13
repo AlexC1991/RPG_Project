@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6569812996342821799
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,26 +20,25 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Air
+  m_Name: CaveMaterial
   m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - N_F_DDMD_ON
   - N_F_EAL_ON
+  - N_F_ESSAO_ON
   - N_F_O_ON
   - N_F_RDC_ON
   - N_F_RELGI_ON
-  - N_F_SIMTRANS_ON
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
-  - N_F_TRANS_ON
   m_InvalidKeywords:
   - N_F_TRANSAFFSHA
   - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
-  - _EMISSION
   - _GIFLATSHADE_OFF
   - _GLOSSTEXTUREFOLLOWOBJECTROTATION_OFF
+  - _GLOSSYREFLECTIONS_OFF
   - _LIGHTAFFECTOUTLINECOLOR_OFF
   - _LIGHTAFFECTRIMLIGHTCOLOR_OFF
   - _LIGHTAFFECTSHADOW_OFF
@@ -50,9 +62,8 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -100,7 +111,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0920d352250ca574f9f8b5b1265d1f9a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskGloss:
@@ -178,8 +189,8 @@ Material:
     - _AlphaBaseCutout: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _BleModDest: 10
-    - _BleModSour: 5
+    - _BleModDest: 0
+    - _BleModSour: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -203,7 +214,7 @@ Material:
     - _DstBlendAlpha: 0
     - _DynamicNoisyOutline: 0
     - _EnvironmentReflections: 1
-    - _EnvironmentalLightingIntensity: 7
+    - _EnvironmentalLightingIntensity: 10.57
     - _FarDistanceMaxWidth: 10
     - _GIFlatShade: 0
     - _GIShadeThreshold: 0
@@ -231,9 +242,10 @@ Material:
     - _MVCOL: 0
     - _MaiColPo: 0.8
     - _MaxFadDistance: 2
-    - _Metallic: 0.723
+    - _Metallic: 0
     - _MinFadDistance: 0
     - _MixMainTexToOutline: 0
+    - _Mode: 0
     - _N_F_ANIS: 0
     - _N_F_CA: 0
     - _N_F_CLD: 0
@@ -242,7 +254,7 @@ Material:
     - _N_F_DCS: 0
     - _N_F_DDMD: 1
     - _N_F_EAL: 1
-    - _N_F_ESSAO: 0
+    - _N_F_ESSAO: 1
     - _N_F_FR: 0
     - _N_F_GLO: 0
     - _N_F_GLOT: 0
@@ -274,13 +286,13 @@ Material:
     - _NoiTexAffStraWidt: 0
     - _NoisTexInten: 1
     - _NoiseSize: 100
-    - _NoisyOutlineIntensity: 1
+    - _NoisyOutlineIntensity: 0
     - _NormalMapIntensity: 1
     - _OcclusionStrength: 1
-    - _Opacity: 0.6
+    - _Opacity: 1
     - _Oper: 0
     - _OutlineExtrudeMethod: 0
-    - _OutlineWidth: 11.59
+    - _OutlineWidth: 0.052
     - _OutlineWidthAffectedByViewDistance: 0
     - _OutlineZPostionInCamera: 0
     - _OverallShadowColorPower: 1
@@ -314,10 +326,10 @@ Material:
     - _SelfLitPower: 2
     - _SelfShadowAffectedByLightShadowStrength: 0
     - _SelfShadowHardness: 1
-    - _SelfShadowRealTimeShadowColorPower: 1
-    - _SelfShadowRealtimeShadowIntensity: 1
+    - _SelfShadowRealTimeShadowColorPower: -0.28
+    - _SelfShadowRealtimeShadowIntensity: 0.6
     - _SelfShadowShadowTAtViewDirection: 0
-    - _SelfShadowThreshold: 0.9
+    - _SelfShadowThreshold: 0.686
     - _ShadowColorTexturePower: 0
     - _ShadowHardness: 0
     - _ShadowTColorPower: 1
@@ -329,10 +341,10 @@ Material:
     - _ShowInAmbientLightShadowIntensity: 1
     - _ShowInAmbientLightShadowThreshold: 0.4
     - _ShowNormal: 0
-    - _SimTrans: 1
+    - _SimTrans: 0
     - _SkinMatrixIndex: 0
     - _SmoothObjectNormal: 0
-    - _Smoothness: 0.384
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -340,13 +352,14 @@ Material:
     - _StraWidt: 10
     - _Surface: 0
     - _TEXMCOLINT: 1
-    - _TRANSMODE: 1
+    - _TRANSMODE: 0
     - _TexturePatternStyle: 0
     - _TrailSize: 1.5
     - _TransAffSha: 1
     - _TransparentThreshold: 0
     - _TriPlaBlend: 4
     - _TriPlaTile: 1
+    - _UVSec: 0
     - _UseSecondaryCutout: 0
     - _UseTLB: 0
     - _VertexColorBlueAffectOutlineWitdh: 0
@@ -358,15 +371,15 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _CustomLightDirection: {r: 0, g: 0, b: 10, a: 0}
-    - _EmissionColor: {r: 0, g: 8.431914, b: 5.032517, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlossColor: {r: 1, g: 1, b: 1, a: 1}
     - _Glow_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0.6745283, g: 1, b: 0.8985669, a: 1}
+    - _HighlightColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _MainColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
     - _ObjPosi: {r: 0, g: 0, b: 0, a: 0}
     - _ObjectForward: {r: 0, g: 0, b: 0, a: 0}
     - _ObjectRight: {r: 0, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 0.17007834, g: 0.9245283, b: 0.3727056, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineOffset: {r: 0, g: 0, b: 0, a: 1}
     - _OverallShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _PTCol: {r: 0, g: 0, b: 0, a: 1}
@@ -380,16 +393,3 @@ Material:
     - _XYZPosition: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7332413251568469552
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 9
