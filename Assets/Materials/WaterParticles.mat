@@ -21,10 +21,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterParticles
-  m_Shader: {fileID: 4800000, guid: 6459b2db96a08ca41b0f9b39dc7ad59e, type: 3}
+  m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_Parent: {fileID: 2100000, guid: 011253432ee11994eaab6a8fe62eddeb, type: 2}
   m_ModifiedSerializedProperties: 24
   m_ValidKeywords:
+  - _EMISSIVE_SIMPLE
+  - _IS_ANGELRING_OFF
+  - _IS_CLIPPING_TRANSMODE
+  - _IS_OUTLINE_CLIPPING_YES
+  - _OUTLINE_NML
+  m_InvalidKeywords:
   - N_F_DDMD_ON
   - N_F_EAL_ON
   - N_F_O_ON
@@ -34,7 +40,6 @@ Material:
   - N_F_SS_ON
   - N_F_TRANSAFFSHA_ON
   - N_F_TRANS_ON
-  m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _CUSTOMLIGHTDIRECTIONFOLLOWOBJECTROTATION_OFF
   - _EMISSION
@@ -66,6 +71,7 @@ Material:
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
+    IgnoreProjection: true
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -83,8 +89,10 @@ Material:
     - _Metallic: 0.136
     - _Smoothness: 0.38
     - _Surface: 1
+    - _Tweak_transparency: -0.559
     - _ZWrite: 0
     m_Colors:
+    - _1st_ShadeColor: {r: 0, g: 0.5647059, b: 0.48333707, a: 1}
     - _BaseColor: {r: 0.05615576, g: 0.002447496, b: 0.5188679, a: 1}
     - _Color: {r: 0.05615574, g: 0.002447496, b: 0.51886785, a: 1}
     - _EmissionColor: {r: 0.003322104, g: 0, b: 0.1462264, a: 1}
